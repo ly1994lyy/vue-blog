@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import CategoryCreate from '../src/components/Category/CategoryCreate.vue'
+import CatogoryList from '../src/components/Category/CatogoryList.vue'
 
 Vue.use(Router)
 
@@ -10,8 +12,17 @@ export default new Router({
   routes: [
     {
       path: '/',
+      redirect:'/home'
+    },
+    {
+      path: '/home',
       name: 'home',
-      component: Home
+      component: Home,
+      children:[
+        {path:'/categories/lists',name:'categoryLists',component:CatogoryList},
+        {path:'/categories/create',name:'categoryCreate',component:CategoryCreate},
+        {path:'/categories/edit/:id',name:'categoryEdit',component:CategoryCreate,props:true},
+      ]
     },
     {
       path: '/about',

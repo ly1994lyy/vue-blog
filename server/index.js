@@ -6,7 +6,7 @@ app.use(require('cors')())
 app.use(express.json())
 
 require('./plugins/db')(app)
-require('./routers/admin')(app)
+require('./routers/admin/index')(app)
 //require('./routers/web')(app)
 
 app.listen(3000,()=>{
