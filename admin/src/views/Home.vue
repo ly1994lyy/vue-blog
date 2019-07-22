@@ -1,10 +1,10 @@
 <template>
   <div class="home">
     <el-container>
-      <el-header style="text-align: right; font-size: 12px">
+      <el-header>
         <el-row>
           <el-col :span="2">博客后台管理系统</el-col>
-          <el-col :span="1" :offset="21">
+          <el-col :span="2" :offset="20">
             <el-dropdown>
               <i class="el-icon-setting"></i>
               <el-dropdown-menu slot="dropdown">
@@ -22,7 +22,7 @@
       <el-aside width="200px" style="background-color: #545c64">
         <el-menu
           router
-          default-active="2"
+          default-active="1"
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
@@ -38,6 +38,11 @@
               <template slot="title">博客分类</template>
               <el-menu-item index="/categories/lists">分类列表</el-menu-item>
               <el-menu-item index="/categories/create">新建分类</el-menu-item>
+            </el-menu-item-group>
+            <el-menu-item-group>
+              <template slot="title">博客</template>
+              <el-menu-item index="/posts/lists">博客列表</el-menu-item>
+              <el-menu-item index="/posts/create">新建博客</el-menu-item>
             </el-menu-item-group>
             <el-menu-item-group title="分组2">
               <el-menu-item index="1-3">选项3</el-menu-item>
@@ -81,7 +86,7 @@ export default {
 
 <style lang="scss" scoped>
 .el-header {
-  background-color: rgb(75, 10, 10);
+  background-color: rgb(141, 126, 126);
   color: #fff;
   line-height: 60px;
 }

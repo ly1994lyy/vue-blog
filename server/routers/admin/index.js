@@ -36,7 +36,7 @@ module.exports = app => {
 
     //博客接口
     router.get('/posts',async (req,res)=>{
-        const model = await Post.find()
+        const model = await Post.find().populate('categories').lean()
         res.send(model)
     })
 
@@ -45,5 +45,21 @@ module.exports = app => {
         res.send(model)
     })
 
+    router.put('/posts/edit/:id',async (req,res)=>{
+        const model = await Post.findByIdAndUpdate(req.params.id,req.body)
+        res.send(model)
+    })
+
+    router.get('/posts/:id',async (req,res)=>{
+        const model = await Post.findById(req.params.id)
+        res.send(model)
+    })
+
+    router.delete('/posts/delete/:id',async (req,res)=>{
+        const model = await Post.findByIdAndDelete(req.params.id,req.body)
+        res.send({
+            success:true
+        })
+    })
     app.use('/admin/api',router)
 }
