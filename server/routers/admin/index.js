@@ -3,13 +3,22 @@ module.exports = app => {
     const router = express.Router({
         mergeParams:true
     })
-    const bcrypt = require('bcrypt')
+    const jwt = require('jsonwebtoken')
+    const assert = require('http-assert')
     const Post = require('../../models/Post')
     const User = require('../../models/User')
     const Category = require('../../models/Category')
 
     //分类接口
-    router.get('/categories',async (req,res)=>{
+    router.get('/categories',async (req,res,next)=>{
+        const token = String(req.headers.authorization || '').split(' ').pop()
+        assert(token,401,"登录已过期！请重新登录")
+        const {id} = jwt.verify(token,app.get('secret'))
+        assert(id,401,"登录已过期！请重新登录")
+        req.user = await User.findById(id)
+        assert(user,401,"登录已过期！请重新登录")
+        await next()
+    },async (req,res)=>{
         const model = await Category.find()
         res.send(model)
     })
@@ -19,7 +28,15 @@ module.exports = app => {
         res.send(model)
     })
 
-    router.put('/categories/edit/:id',async (req,res)=>{
+    router.put('/categories/edit/:id',async (req,res,next)=>{
+        const token = String(req.headers.authorization || '').split(' ').pop()
+        assert(token,401,"登录已过期！请重新登录")
+        const {id} = jwt.verify(token,app.get('secret'))
+        assert(id,401,"登录已过期！请重新登录")
+        req.user = await User.findById(id)
+        assert(user,401,"登录已过期！请重新登录")
+        await next()
+    },async (req,res)=>{
         const model = await Category.findByIdAndUpdate(req.params.id,req.body)
         res.send(model)
     })
@@ -71,23 +88,6 @@ module.exports = app => {
     })
 
     router.post('/users',async (req,res)=>{
-        // const user = await User.findOne({username:req.body.username})
-        // if(user){
-        //     res.status(422).json('用户名已被注册')
-        // }else{
-        //     const model = new User({
-        //         usernam:req.body.username,
-        //         password:req.body.password
-        //     })
-        //     bcrypt.genSalt(12, (err, salt) => {
-        //         bcrypt.hash(model.password, salt, (err, hash)=> {
-        //             if(err) throw err
-        //             model.password = hash
-        //             model.sava().then(user=>res.send(user))
-                    
-        //         });
-        //     });
-        // }
         const model = await User.create(req.body)
         res.send(model)
     })
@@ -108,5 +108,13 @@ module.exports = app => {
             success:true
         })
     })
+    
     app.use('/admin/api',router)
+
+     //错误处理函数
+     app.use(async(err,req,res,next)=>{
+        res.status(err.statusCode || 500).send({
+            message:err.message
+        })
+    })
 }
