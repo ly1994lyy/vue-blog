@@ -6,6 +6,8 @@ import CatogoryList from '../src/components/Category/CatogoryList.vue'
 import PostList from '../src/components/Post/PostList.vue'
 import PostCreate from '../src/components/Post/PostCreate.vue'
 import Login from '../src/components/User/Login.vue'
+import UserList from '../src/components/User/UserList.vue'
+import UserCreate from '../src/components/User/UserCreate.vue'
 
 Vue.use(Router)
 
@@ -28,6 +30,9 @@ export default new Router({
         {path:'/posts/lists',name:'postLists',component:PostList},
         {path:'/posts/create',name:'postCreate',component:PostCreate},
         {path:'/posts/edit/:id',name:'postEdit',component:PostCreate,props:true},
+        {path:'/users/lists',name:'UserList',component:UserList},
+        {path:'/users/create',name:'UserCreate',component:UserCreate},
+        {path:'/users/edit/:id',name:'UserEdit',component:UserCreate,props:true},
       ]
     },
     {
