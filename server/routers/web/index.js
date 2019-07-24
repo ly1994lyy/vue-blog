@@ -5,7 +5,7 @@ module.exports = app =>{
     const Category = require('../../models/Category')
 
     router.get('/posts',async (req,res)=>{
-        const model = await Post.find().lean()
+        const model = await Post.find().populate('categories').lean()
         res.send(model)
     })
     router.get('/categories',async (req,res)=>{
