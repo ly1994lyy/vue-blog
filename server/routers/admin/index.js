@@ -3,50 +3,33 @@ module.exports = app => {
     const router = express.Router({
         mergeParams:true
     })
-    const jwt = require('jsonwebtoken')
-    const assert = require('http-assert')
     const Post = require('../../models/Post')
     const User = require('../../models/User')
     const Category = require('../../models/Category')
+    const authMiddleWare = require('../../middleware/auth')
 
     //分类接口
-    router.get('/categories',async (req,res,next)=>{
-        const token = String(req.headers.authorization || '').split(' ').pop()
-        assert(token,401,"登录已过期！请重新登录")
-        const {id} = jwt.verify(token,app.get('secret'))
-        assert(id,401,"登录已过期！请重新登录")
-        req.user = await User.findById(id)
-        assert(user,401,"登录已过期！请重新登录")
-        await next()
-    },async (req,res)=>{
+    router.get('/categories',authMiddleWare(),async (req,res)=>{
         const model = await Category.find()
         res.send(model)
     })
 
-    router.post('/categories',async (req,res)=>{
+    router.post('/categories',authMiddleWare(),async (req,res)=>{
         const model = await Category.create(req.body)
         res.send(model)
     })
 
-    router.put('/categories/edit/:id',async (req,res,next)=>{
-        const token = String(req.headers.authorization || '').split(' ').pop()
-        assert(token,401,"登录已过期！请重新登录")
-        const {id} = jwt.verify(token,app.get('secret'))
-        assert(id,401,"登录已过期！请重新登录")
-        req.user = await User.findById(id)
-        assert(user,401,"登录已过期！请重新登录")
-        await next()
-    },async (req,res)=>{
+    router.put('/categories/edit/:id',authMiddleWare(),async (req,res)=>{
         const model = await Category.findByIdAndUpdate(req.params.id,req.body)
         res.send(model)
     })
 
-    router.get('/categories/:id',async (req,res)=>{
+    router.get('/categories/:id',authMiddleWare(),async (req,res)=>{
         const model = await Category.findById(req.params.id)
         res.send(model)
     })
 
-    router.delete('/categories/delete/:id',async (req,res)=>{
+    router.delete('/categories/delete/:id',authMiddleWare(),async (req,res)=>{
         const model = await Category.findByIdAndDelete(req.params.id,req.body)
         res.send({
             success:true
@@ -54,27 +37,27 @@ module.exports = app => {
     })
 
     //博客接口
-    router.get('/posts',async (req,res)=>{
+    router.get('/posts',authMiddleWare(),async (req,res)=>{
         const model = await Post.find().populate('categories').lean()
         res.send(model)
     })
 
-    router.post('/posts',async (req,res)=>{
+    router.post('/posts',authMiddleWare(),async (req,res)=>{
         const model = await Post.create(req.body)
         res.send(model)
     })
 
-    router.put('/posts/edit/:id',async (req,res)=>{
+    router.put('/posts/edit/:id',authMiddleWare(),async (req,res)=>{
         const model = await Post.findByIdAndUpdate(req.params.id,req.body)
         res.send(model)
     })
 
-    router.get('/posts/:id',async (req,res)=>{
+    router.get('/posts/:id',authMiddleWare(),async (req,res)=>{
         const model = await Post.findById(req.params.id)
         res.send(model)
     })
 
-    router.delete('/posts/delete/:id',async (req,res)=>{
+    router.delete('/posts/delete/:id',authMiddleWare(),async (req,res)=>{
         const model = await Post.findByIdAndDelete(req.params.id,req.body)
         res.send({
             success:true
@@ -82,27 +65,27 @@ module.exports = app => {
     })
 
     //用户接口
-    router.get('/users',async (req,res)=>{
+    router.get('/users',authMiddleWare(),async (req,res)=>{
         const model = await User.find()
         res.send(model)
     })
 
-    router.post('/users',async (req,res)=>{
+    router.post('/users',authMiddleWare(),async (req,res)=>{
         const model = await User.create(req.body)
         res.send(model)
     })
 
-    router.put('/users/edit/:id',async (req,res)=>{
+    router.put('/users/edit/:id',authMiddleWare(),async (req,res)=>{
         const model = await User.findByIdAndUpdate(req.params.id,req.body)
         res.send(model)
     })
 
-    router.get('/users/:id',async (req,res)=>{
+    router.get('/users/:id',authMiddleWare(),async (req,res)=>{
         const model = await User.findById(req.params.id)
         res.send(model)
     })
 
-    router.delete('/users/delete/:id',async (req,res)=>{
+    router.delete('/users/delete/:id',authMiddleWare(),async (req,res)=>{
         const model = await User.findByIdAndDelete(req.params.id,req.body)
         res.send({
             success:true

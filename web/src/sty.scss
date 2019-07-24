@@ -1,0 +1,31 @@
+//flex布局
+.d-flex{
+    display: flex;
+}
+
+.ai-center{
+    align-content: center;
+}
+
+.jc-center{
+    justify-content: center;
+}
+.jc-between{
+    justify-content: space-between;
+}
+
+.jc-around{
+    justify-content: space-around;
+}
+
+.f-wrap{
+    flex-wrap: wrap;
+}
+
+.text-center{
+    text-align: center
+}
+
+html{
+    background-image: url('../public/logo.jpg');
+}

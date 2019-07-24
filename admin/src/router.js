@@ -11,7 +11,7 @@ import UserCreate from '../src/components/User/UserCreate.vue'
 
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -36,17 +36,24 @@ export default new Router({
       ]
     },
     {
-      path:'/admin/login',
+      path:'/login',
       name:'adminlogin',
-      component:Login
+      component:Login,
+      meta:{isPablic:true}
     },
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
     }
   ]
 })
+
+router.beforeEach((to,from,next)=>{
+  if(!to.meta.isPablic && !localStorage.token){
+    return next('/login')
+  }
+  next()
+})
+
+export default router
