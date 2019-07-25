@@ -26,6 +26,11 @@
     text-align: center
 }
 
-html{
+body{
     background-image: url('../public/logo.jpg');
+    background-attachment: fixed;
+}
+
+.m-2{
+    margin-top: 20px;
 }

@@ -96,7 +96,7 @@ module.exports = app => {
 
      //错误处理函数
      app.use(async(err,req,res,next)=>{
-        res.status(err.statusCode || 500).send({
+        res.status(err.statusCode ||500).send({
             message:err.message
         })
     })

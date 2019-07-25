@@ -5,6 +5,26 @@
         <span>博客分类</span>
       </div>
       <div v-for="item in categories" :key="item.id" class="text-center">{{item.typename}}<hr></div>
+    </el-card>
+    <el-card class="m-2">
+      <div slot="header">
+        <span>推荐博客</span>
+      </div>
+      <div v-for="item in categories" :key="item.id" class="text-center">{{item.typename}}<hr></div>
+      
+    </el-card>
+    <el-card class="m-2">
+      <div slot="header">
+        <span>热门博客</span>
+      </div>
+      <div v-for="item in categories" :key="item.id" class="text-center">{{item.typename}}<hr></div>
+      
+    </el-card>
+    <el-card class="m-2">
+      <div slot="header">
+        <span>最新博客</span>
+      </div>
+      <div v-for="item in categories" :key="item.id" class="text-center">{{item.typename}}<hr></div>
       
     </el-card>
   </div>

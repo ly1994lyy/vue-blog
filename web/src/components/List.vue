@@ -3,8 +3,8 @@
         <el-card>
             <div class="blog_container">
                 <div v-for="item in model" :key="item.id">
-                    <h2 class="text-center blog_title">{{item.title}}</h2>
-                    <div class="text-center blog_text"><i class="el-icon-timer"></i> 2019-7-24|<i class="el-icon-folder-opened"></i>{{item.categories.map(v=>v.typename).join('|')}}</div>
+                    <router-link tag="h2" :to='`blog/${item._id}`' class="text-center blog_title">{{item.title}}</router-link>
+                    <div class="text-center blog_text"><i class="el-icon-timer"></i>{{item.created}}|<i class="el-icon-folder-opened"></i>{{item.categories.map(v=>v.typename).join('|')}}</div>
                     <p v-html="item.body" class="blog_body"></p>
                 </div> 
             </div>
@@ -33,9 +33,6 @@
 </script>
 
 <style lang="scss" scoped>
-// .blog_container{
-//     background-color: #eee;
-// }
 .blog_text{
     margin: 10px 0;
 }

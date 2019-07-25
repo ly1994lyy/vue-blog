@@ -15,7 +15,7 @@ module.exports = app =>{
             id:user.id,
             username:user.username
         }
-        const token = jwt.sign(rule,app.get('secret'),{ expiresIn:3600 })
+        const token = jwt.sign(rule,app.get('secret'))
         res.send({token})
     
     })

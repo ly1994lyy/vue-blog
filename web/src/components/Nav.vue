@@ -14,9 +14,9 @@
             @select="handleSelect"
           >
             <el-menu-item index="/">博客列表</el-menu-item>
-            <el-menu-item index="2">博客分类</el-menu-item>
+            <el-menu-item index="/categories">博客分类</el-menu-item>
             <el-menu-item index="3">时间归档</el-menu-item>
-            <el-menu-item index="4">关于博主</el-menu-item>
+            <el-menu-item index="/about">关于博主</el-menu-item>
           </el-menu>
         </div>
         <div class="blog_user">

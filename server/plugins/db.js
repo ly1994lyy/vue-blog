@@ -1,7 +1,7 @@
 module.exports = app =>{
     const mongoose = require('mongoose')
 
-    mongoose.connect("mongodb://localhost:27017/myblog",{
+    mongoose.connect("mongodb://localhost:27017/vue-node-myblog",{
         useNewUrlParser:true,
         useCreateIndex:true
 })
