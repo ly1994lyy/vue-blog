@@ -1,0 +1,28 @@
+#root {
+  background-color: #7a6666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .login_container {
+    width: 300px;
+    height: 300px;
+    h1 {
+      text-align: center;
+      padding-bottom: 30px;
+    }
+    #components-form-demo-normal-login {
+      .login-form {
+        max-width: 300px;
+      }
+      .login-form-forgot {
+        float: right;
+      }
+      .ant-col-rtl .login-form-forgot {
+        float: left;
+      }
+      .login-form-button {
+        width: 100%;
+      }
+    }
+  }
+}

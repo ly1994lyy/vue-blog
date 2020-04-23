@@ -1,0 +1,1 @@
+export const imgUrl = process.env.REACT_APP_IMG_URL || "https://www.codelife.icu/admin/api/upload"
