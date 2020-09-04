@@ -1,4 +1,4 @@
-# web
+# admin
 
 ## Project setup
 ```

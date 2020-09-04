@@ -1,33 +1,18 @@
 <template>
   <div class="home">
-     <Nav></Nav>
-     <el-row>
-       <el-col :span=16 :offset=2>
-         <router-view></router-view>
-       </el-col>
-       <el-col :span=4 :offset=1>
-         <Right></Right>
-       </el-col>
-     </el-row>
+    <img alt="Vue logo" src="../assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import Nav from "../components/Nav";
-import List from "../components/List";
-import Right from "../components/Right";
+import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
-  name: "home",
+  name: 'Home',
   components: {
-    Nav,
-    List,
-    Right
+    HelloWorld
   }
-};
+}
 </script>
-
-<style lang="scss" scoped>
-
-</style>
