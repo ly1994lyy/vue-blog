@@ -19,12 +19,12 @@
     ></vue-particles>
     <div class="login-box">
       <h2 class="login-title">欢迎登录</h2>
-      <el-form ref="form" :model="form" label-width="80px">
+      <el-form ref="form" :model="model" label-width="80px">
         <el-form-item label="用户名">
-          <el-input v-model="username"></el-input>
+          <el-input v-model="model.username"></el-input>
         </el-form-item>
         <el-form-item label="密码">
-          <el-input v-model="password" type="password"></el-input>
+          <el-input v-model="model.password" type="password"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="login" :loading="loginLoading">登录</el-button>
@@ -35,18 +35,24 @@
 </template>
 
 <script>
+import {login} from '../api/auth'
+
 export default {
   data() {
     return {
       loginLoading:false,
-      username:'',
-      password:''
+      model:{
+        username:'',
+        password:''
+      }
     };
   },
   methods: {
     async login(){
       this.loginLoading = true
-      await this.$http.post('/login',{username:this.username,password:this.password})
+      const res = await login({username:this.model.username,password:this.model.password})
+      const token = res.data.token
+      localStorage.setItem('adminToken',token)
       this.loginLoading = false
       this.$router.push('/')
     }

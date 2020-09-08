@@ -16,10 +16,21 @@ const routes = [
         component: () => import("../views/Home.vue"),
       },
       {
-        path: '/category',
+        path: "/category",
         name: "CategoryList",
-        component: () => import("../views/CategoryList.vue")
-      }
+        component: () => import("../views/CategoryList.vue"),
+      },
+      {
+        path: "/category/create",
+        name: "CreateCategory",
+        component: () => import("../views/CategoryEdit.vue"),
+      },
+      {
+        path: "/category/edit/:id",
+        name: "CreateCategory",
+        props: true,
+        component: () => import("../views/CategoryEdit.vue"),
+      },
     ],
   },
   {

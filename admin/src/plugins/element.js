@@ -14,9 +14,13 @@ import {
   Header,
   Dropdown,
   DropdownMenu,
+  DropdownItem,
   Table,
   TableColumn,
   Footer,
+  Popconfirm,
+  Dialog,
+  Message,
 } from "element-ui";
 
 Vue.use(Button)
@@ -33,6 +37,12 @@ Vue.use(Button)
   .use(Header)
   .use(Dropdown)
   .use(DropdownMenu)
+  .use(DropdownItem)
   .use(Table)
   .use(TableColumn)
-  .use(Footer);
+  .use(Footer)
+  .use(Popconfirm)
+  .use(Dialog);
+
+
+Vue.prototype.$message = Message

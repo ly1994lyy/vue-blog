@@ -6,6 +6,10 @@ const http =  axios.create({
 })
 
 http.interceptors.request.use((config) => {
+    if (localStorage.adminToken) {
+        config.headers.Authorization = 'Bearer ' + localStorage.adminToken
+    }
+    
     return config
 }, (error) => {
         return Promise.reject(error);
@@ -21,5 +25,19 @@ http.interceptors.response.use((res) => {
         return Promise.reject(error)
 })
 
+export const get = (url,params) => {
+    return http.get(url,{params})
+}
 
-export default http
+
+export const post = (url, data)=>{
+    return http.post(url,data)
+}
+
+export const put = (url, data)=>{
+    return http.put(url,data)
+}
+
+export const del = (url)=>{
+    return http.delete(url)
+}
