@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Layout, Button,Slider, Icon, Menu } from 'ant-design-vue'
+import { Layout, Button,Slider, Icon, Menu, FormModel, Input } from 'ant-design-vue'
 
 const { Header, Footer, Content, Sider } = Layout
 const { ItemGroup } = Menu
@@ -14,3 +14,5 @@ Vue.use(Layout)
   .use(Icon)
   .use(Menu)
   .use(ItemGroup)
+  .use(FormModel)
+  .use(Input)

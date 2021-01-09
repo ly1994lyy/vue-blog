@@ -8,8 +8,8 @@ const routes = [
   {
     path: '/',
     name: 'Main',
-    component:Main,
-    children:[
+    component: Main,
+    children: [
       {
         path: '/cateList',
         name: 'cateList',
@@ -20,7 +20,11 @@ const routes = [
       }
     ]
   },
-  
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/Login')
+  }
 ]
 
 const router = new VueRouter({
