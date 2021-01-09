@@ -1,43 +1,36 @@
 import axios from 'axios'
-import { Message } from 'element-ui';
 
-const http =  axios.create({
-    baseURL:'http://localhost:3008',
+const http = axios.create({
+  baseURL: '',
+  timeout: 5000
 })
 
-http.interceptors.request.use((config) => {
-    if (localStorage.adminToken) {
-        config.headers.Authorization = 'Bearer ' + localStorage.adminToken
-    }
-    
-    return config
-}, (error) => {
-        return Promise.reject(error);
+//请求拦截器
+http.interceptors.request.use(config => {
+  return config
+}, error => {
+  return Promise.reject(error)
 })
 
-
-http.interceptors.response.use((res) => {
-    return res
-}, (error) => {
-        if (error.response.data.statusCode === 401) {
-            Message.error(error.response.data.message)
-        }
-        return Promise.reject(error)
+//响应拦截器
+http.interceptors.response.use(res => {
+  return res
+}, error => {
+  return Promise.reject(error)
 })
 
-export const get = (url,params) => {
-    return http.get(url,{params})
+export const get = (url, params) => {
+  return http.get(url, params)
 }
 
-
-export const post = (url, data)=>{
-    return http.post(url,data)
+export const post = (url, params) => {
+  return http.post(url, { params })
 }
 
-export const put = (url, data)=>{
-    return http.put(url,data)
+export const update = (url, params) => {
+  return http.put(url, { params })
 }
 
-export const del = (url)=>{
-    return http.delete(url)
+export const del = (url) => {
+  return http.delete(url)
 }
