@@ -26,15 +26,12 @@
             <a-button
               type="primary"
               @click="reset"
-            >
-              重置
-            </a-button>
+            > 重置 </a-button>
             <a-button
-              style="margin-left: 10px;"
+              style="margin-left: 10px"
               @click="login"
-            >
-              登录
-            </a-button>
+              :loading="loading"
+            > 登录 </a-button>
           </a-form-model-item>
         </a-form-model>
       </div>
@@ -44,14 +41,15 @@
 
 <script>
 import { AdminLogin } from '@/api/auth'
+import { mapState } from 'vuex'
 
 export default {
-  name: "login",
+  name: 'login',
   data () {
     return {
       loginForm: {
         username: '',
-        password: ''
+        password: '',
       },
       loginRules: {
         username: [
@@ -61,14 +59,17 @@ export default {
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
           { min: 6, max: 8, message: '密码长度在6~8之间', trigger: 'blur' },
-        ]
+        ],
       }
     }
   },
   methods: {
     async login () {
       try {
-        const res = await AdminLogin({ username: this.loginForm.username, password: this.loginForm.password })
+        const res = await AdminLogin({
+          username: this.loginForm.username,
+          password: this.loginForm.password,
+        })
         console.log(res)
       } catch (error) {
         throw new Error(error)
@@ -77,8 +78,11 @@ export default {
     reset () {
       this.$refs.loginForm.resetFields()
     }
-  }
-}
+  },
+  computed: {
+    ...mapState(['loading'])
+  },
+};
 </script>
 
 <style lang="less" scoped>
