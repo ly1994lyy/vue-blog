@@ -1,0 +1,22 @@
+export const cateCols = [
+  {
+    align: 'center',
+    dataIndex: '_id',
+    title: 'ID',
+  },
+  {
+    align: 'center',
+    dataIndex: 'name',
+    title: '分类名称',
+  },
+  {
+    align: 'center',
+    dataIndex: 'createdAt',
+    title: '创建时间',
+  },
+  {
+    align: 'center',
+    title: '操作',
+    scopedSlots: { customRender: 'operation' },
+  },
+]

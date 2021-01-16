@@ -7,16 +7,28 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Main',
     component: Main,
     children: [
       {
+        path: '/',
+        name: 'Home',
+        type:'home',
+        title:'主页',
+        component: () => import(/* webpackChunkName: "about" */ '../views/Home')
+      },
+      {
         path: '/cateList',
         name: 'cateList',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
+        type:'appstore',
+        title:'分类',
         component: () => import(/* webpackChunkName: "about" */ '../views/category/list')
+      },
+      {
+        path: '/article',
+        name: 'article',
+        type:'highlight',
+        title:'博客',
+        component: () => import(/* webpackChunkName: "about" */ '../views/blog/list.vue')
       }
     ]
   },

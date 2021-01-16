@@ -1,32 +1,28 @@
 <template>
-  <a-layout id="components-layout-demo-responsive">
+  <a-layout
+    id="components-layout-demo-responsive"
+    style="height:100vh"
+  >
     <a-layout-sider
       breakpoint="lg"
       collapsed-width="0"
       @collapse="onCollapse"
       @breakpoint="onBreakpoint"
+      style="height:100vh"
     >
       <div class="logo" />
       <a-menu
         theme="dark"
         mode="inline"
-        :default-selected-keys="['4']"
+        :default-selected-keys="[$route.path]"
       >
-        <a-menu-item key="1">
-          <a-icon type="user" />
-          <span class="nav-text">nav 1</span>
-        </a-menu-item>
-        <a-menu-item key="2">
-          <a-icon type="video-camera" />
-          <span class="nav-text">nav 2</span>
-        </a-menu-item>
-        <a-menu-item key="3">
-          <a-icon type="upload" />
-          <span class="nav-text">nav 3</span>
-        </a-menu-item>
-        <a-menu-item key="4">
-          <a-icon type="user" />
-          <span class="nav-text">nav 4</span>
+        <a-menu-item
+          v-for="item in mainRoutes"
+          :key="item.path"
+          @click="$router.push({name:item.name})"
+        >
+          <a-icon :type="item.type" />
+          <span class="nav-text">{{item.title}}</span>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
@@ -45,15 +41,27 @@
 </template>
 
 <script>
+import Route from '../router/index'
+
 export default {
   name: "Main",
+  data () {
+    return {
+      theme: 'dark'
+    }
+  },
   methods: {
     onCollapse (collapsed, type) {
       console.log(collapsed, type);
     },
     onBreakpoint (broken) {
       console.log(broken);
-    },
+    }
+  },
+  computed: {
+    mainRoutes () {
+      return Route.options.routes.find(e => e.path === '/').children
+    }
   }
 }
 </script>
