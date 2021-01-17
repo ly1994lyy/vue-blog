@@ -25,14 +25,14 @@ http.interceptors.response.use(res => {
   store.state.loading = false
   return res
 }, error => {
-  console.log('拦截器2',error.response)
+  console.log('拦截器2', error.response.data)
   NProgress.done()
   store.state.loading = false
   return Promise.reject(error)
 })
 
 export const get = (url, params) => {
-  return http.get(url, { params })
+  return http.get(url, { params: { query: { where: params } } })
 }
 
 export const post = (url, params) => {

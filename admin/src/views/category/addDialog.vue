@@ -43,7 +43,7 @@ export default {
       rules: {
         name: [
           { required: true, message: '请填写分类', trigger: 'blur' },
-          { max: 7, message: '最大长度不能超过7', trigger: 'blur' }
+          { max: 15, message: '最大长度不能超过15', trigger: 'blur' }
         ]
       }
     }

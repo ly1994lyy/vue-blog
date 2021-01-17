@@ -9,7 +9,9 @@
         <a-input-search
           placeholder="搜索分类"
           style="width: 200px"
-          @search="onSearch"
+          @search="fetch"
+          allow-clear
+          v-model="search"
         />
       </a-col>
       <a-col :span="4">
@@ -66,7 +68,8 @@ export default {
       columns: cateCols,
       visible: false,
       id: '',
-      name: ''
+      name: '',
+      search: ''
     };
   },
   components: {
@@ -74,13 +77,13 @@ export default {
   },
   methods: {
     async fetch () {
-      try {
-        const res = await getCate();
-        if (res) {
-          this.tableData = res.data.data;
-        }
-      } catch (error) {
-        console.log(error);
+      let params = {}
+      if (this.search) {
+        params = { name: this.search }
+      }
+      const res = await getCate(params);
+      if (res.status === 200) {
+        this.tableData = res.data.data;
       }
     },
     edit (row) {
@@ -93,24 +96,15 @@ export default {
       this.$confirm({
         title: '提示',
         content: '确定要删除此条分类?',
-        onOk () {
-          return new Promise((resolve, reject) => {
-            delCate(id).then((res) => {
-              if (res.status === 200) {
-                self.$message.success('修改成功!')
-                self.fetch()
-                resolve()
-              }
-            }).catch(() => {
-              console.log(reject)
-            })
-          })
+        async onOk () {
+          const res = await delCate(id)
+          if (res.status === 200) {
+            self.$message.success('删除成功!')
+            self.fetch()
+          }
         },
         onCancel () { },
       });
-    },
-    onSearch () {
-      console.log('sda')
     },
     add () {
       this.visible = true
