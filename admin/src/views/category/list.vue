@@ -27,6 +27,7 @@
       :dataSource="tableData"
       :columns="columns"
       :loading="loading"
+      :pagination="pagination"
       bordered
     >
       <span
@@ -69,7 +70,17 @@ export default {
       visible: false,
       id: '',
       name: '',
-      search: ''
+      search: '',
+      pagination: {
+        total: 0,
+        current: 1,
+        pageSize: 10,
+        showSizeChanger: true,
+        showTotal: total => `共 ${total} 条数据`,
+        pageSizeOptions: ['10', '20', '30', '50'],
+        onChange: (current, pageSize) => this.changeCurrent(current, pageSize),
+        onShowSizeChange: (current, size) => this.changSize(current, size)
+      }
     };
   },
   components: {
@@ -77,13 +88,25 @@ export default {
   },
   methods: {
     async fetch () {
-      let params = {}
+      let params = {
+        query: {
+          limit: this.pagination.pageSize,
+          page: this.pagination.current
+        }
+
+      }
       if (this.search) {
-        params = { name: this.search }
+        params = {
+          ...params,
+          where: {
+            name: this.search
+          }
+        }
       }
       const res = await getCate(params);
       if (res.status === 200) {
         this.tableData = res.data.data;
+        this.pagination.total = Number(res.data.total)
       }
     },
     edit (row) {
@@ -113,6 +136,16 @@ export default {
       this.id = ""
       this.name = ""
       this.visible = false
+    },
+    changeCurrent (current, pageSize) {
+      this.pagination.current = current
+      this.pagination.pageSize = pageSize
+      this.fetch()
+    },
+    changSize (current, size) {
+      this.pagination.current = current
+      this.pagination.pageSize = size
+      this.fetch()
     }
   },
   computed: {
@@ -124,4 +157,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="less" scoped></style>

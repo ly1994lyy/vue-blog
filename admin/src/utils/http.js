@@ -32,7 +32,7 @@ http.interceptors.response.use(res => {
 })
 
 export const get = (url, params) => {
-  return http.get(url, { params: { query: { where: params } } })
+  return http.get(url, { params })
 }
 
 export const post = (url, params) => {
