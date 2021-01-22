@@ -93,13 +93,15 @@ export default {
           limit: this.pagination.pageSize,
           page: this.pagination.current
         }
-
       }
       if (this.search) {
         params = {
-          ...params,
-          where: {
-            name: this.search
+          query: {
+            limit: this.pagination.pageSize,
+            page: 1,
+            where: {
+              name: this.search
+            }
           }
         }
       }
@@ -152,6 +154,7 @@ export default {
     ...mapState(['loading']),
   },
   created () {
+    this.pagination.current = 1
     this.fetch();
   },
 };
