@@ -12,11 +12,15 @@ import {
   Modal,
   message,
   Row,
-  Col
+  Col,
+  ConfigProvider,
+  Card,
+  Select
 } from 'ant-design-vue';
 
 const { Header, Footer, Content, Sider } = Layout;
 const { ItemGroup } = Menu;
+const { Option } = Select
 const { confirm } = Modal;
 
 Vue.prototype.$message = message;
@@ -39,3 +43,7 @@ Vue.use(Layout)
   .use(Row)
   .use(Col)
   .use(Modal)
+  .use(ConfigProvider)
+  .use(Card)
+  .use(Select)
+  .use(Option)

@@ -5,9 +5,6 @@ import store from './store'
 import './plugins/antd'
 import './assets/style.less'
 import './assets/reset.less'
-import  {ConfigProvider}  from 'ant-design-vue'
-
-Vue.use(ConfigProvider)
 
 Vue.config.productionTip = false
 

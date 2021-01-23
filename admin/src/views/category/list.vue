@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { getCate, delCate } from '@/api/cate';
+import { getCate, delCate } from '@/api/cate'
 import { mapState } from 'vuex';
 import { cateCols } from '@/utils/enum'
 import AddDialog from './addDialog.vue';

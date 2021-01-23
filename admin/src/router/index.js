@@ -33,6 +33,11 @@ const routes = [
     ]
   },
   {
+    path: '/editBlog',
+    name: 'editBlog',
+    component: () => import('../views/blog/edit.vue')
+  },
+  {
     path: '/login',
     name: 'login',
     component: () => import('../views/Login')
