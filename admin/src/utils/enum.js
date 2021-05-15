@@ -11,8 +11,8 @@ export const cateCols = [
   },
   {
     align: 'center',
-    dataIndex: 'createdAt',
     title: '创建时间',
+    scopedSlots: { customRender: 'createTime' },
   },
   {
     align: 'center',
@@ -39,8 +39,8 @@ export const BlogCols = [
   },
   {
     align: 'center',
-    dataIndex: 'createdAt',
     title: '创建时间',
+    scopedSlots: { customRender: 'createTime' },
   },
   {
     align: 'center',

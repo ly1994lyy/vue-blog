@@ -25,6 +25,7 @@
 
 <script>
 import { createCate, putCate } from '@/api/cate';
+import { validSpecial } from '@/utils/validate'
 
 export default {
   props: {
@@ -42,8 +43,12 @@ export default {
       },
       rules: {
         name: [
-          { required: true, message: '请填写分类', trigger: 'blur' },
-          { max: 15, message: '最大长度不能超过15', trigger: 'blur' }
+          { required: true, message: '请填写分类', trigger: 'change' },
+          { max: 15, message: '最大长度不能超过15', trigger: 'change' },
+          {
+            validator: validSpecial,
+            trigger: 'change'
+          }
         ]
       }
     }
@@ -64,6 +69,7 @@ export default {
   },
   methods: {
     cancel () {
+      this.$refs.form.resetFields()
       this.$emit('closeDialog')
     },
     submit () {

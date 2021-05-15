@@ -31,6 +31,12 @@
       bordered
     >
       <span
+        slot="createTime"
+        slot-scope="text, record"
+      >
+        {{record.createdAt | formatTime}}
+      </span>
+      <span
         slot="operation"
         slot-scope="text, record"
       >

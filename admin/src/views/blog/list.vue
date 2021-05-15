@@ -31,6 +31,12 @@
       bordered
     >
       <span
+        slot="createTime"
+        slot-scope="text, record"
+      >
+        {{record.createdAt | formatTime}}
+      </span>
+      <span
         slot="operation"
         slot-scope="text, record"
       >
@@ -120,7 +126,7 @@ export default {
       let self = this
       this.$confirm({
         title: '提示',
-        content: '确定要删除此条分类?',
+        content: '确定要删除此条博客?',
         async onOk () {
           const res = await delBlog(id)
           if (res.status === 200) {
